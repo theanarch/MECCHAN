@@ -1,37 +1,93 @@
-/* Please see documentation at https://docs.microsoft.com/aspnet/core/client-side/bundling-and-minification 
-for details on configuring this project to bundle and minify static web assets. */
 body {
-    padding-top: 50px;
-    padding-bottom: 20px;
+    background-color: #FFF;
+    font-size: 16px;
 }
 
-/* Wrapping element */
-/* Set some basic padding to keep content from hitting the edges */
-.body-content {
-    padding-left: 15px;
-    padding-right: 15px;
+.page-wrapper {
+    width: 600px;
+    margin: auto;
 }
 
-/* Carousel */
-.carousel-caption p {
-    font-size: 20px;
-    line-height: 1.4;
+.message-wrapper, .create-wrapper {
+    border-bottom: 3px solid #FFF;
+    /*background: #13b69d;*/
+    color: #FFF;
+    padding: 2rem;
 }
 
-/* Make .svg files in the carousel display properly in older browsers */
-.carousel-inner .item img[src$=".svg"] {
-    width: 100%;
+/*.post-wrapper:nth-child(odd) {
+    background: #13b69d;
 }
 
-/* QR code generator */
-#qrCode {
-    margin: 15px;
+.message-wrapper:nth-child(even) {
+    background: #8c13b6
+}*/
+
+
+
+.message-content {
+    display: flex;
 }
 
-/* Hide/rearrange for smaller screens */
-@media screen and (max-width: 767px) {
-    /* Hide captions */
-    .carousel-caption {
-        display: none;
+
+.content-text {
+    align-content: stretch;
+    flex-grow: 1;
+}
+
+.content-rating {
+    width: 50px;
+    font-size: 2rem;
+    font-weight: bold;
+    text-align: center;
+}
+
+.create-wrapper {
+    background-color: #6f6f6f;
+}
+
+/*span {
+    margin-bottom: 1rem;
+    font-size: 1.5rem;
+    font-weight: bold;
+    color: #d7d7d7;
+}*/
+
+.header-container {
+    display: flex;
+    justify-content: space-between;
+    height: 40px;
+    color: #232323;
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+}
+
+    .header-container div {
+        margin: 0 30px 0 30px;
+        display: flex;
+        justify-content: center;
+        flex-direction: column;
+        text-align: center;
     }
+
+.header-logo span, .fa-fingerprint {
+    margin-left: 0.5rem;
+    font-size: 2rem;
+    font-weight: bold;
+    color: #820303;
+}
+
+.header-logo span {
+    color: #232323;
+}
+
+a:link, a:visited, a:active, a:hover {
+    color: #232323;
+    text-decoration: none;
+}
+
+.big-box {
+    width: 100%;
+    background-color: gray;
+    height: 100vh;
+    border-top: 1px solid black;
 }

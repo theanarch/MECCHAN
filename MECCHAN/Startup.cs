@@ -35,7 +35,7 @@ namespace MECCHAN
             //});
 
             services.AddDbContext<MECCHANDbContext>(options =>
-            options.UseSqlServer(Configuration.GetConnectionString("DefaultConnectionString")));
+            options.UseSqlServer(Configuration.GetConnectionString("PhilipConnectionString")));
 
             //services.AddTransient
             //services.AddSingleton
