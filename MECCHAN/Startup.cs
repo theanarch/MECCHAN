@@ -35,16 +35,22 @@ namespace MECCHAN
             //});
 
             services.AddDbContext<MECCHANDbContext>(options =>
-            options.UseSqlServer(Configuration.GetConnectionString("PhilipConnectionString")));
+            options.UseSqlServer(Configuration.GetConnectionString("DefaultConnectionString")));
 
             //services.AddTransient
             //services.AddSingleton
 
             services.AddIdentity<IdentityUser, IdentityRole>()
                 .AddEntityFrameworkStores<MECCHANDbContext>();
+        
+            //services.AddAuthenticationCore()
 
-
-            services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_1);
+            services
+                .AddMvc()
+                .AddRazorPagesOptions(options => {
+                    options.Conventions.AuthorizePage("/Login");
+                })
+                .SetCompatibilityVersion(CompatibilityVersion.Version_2_1);
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

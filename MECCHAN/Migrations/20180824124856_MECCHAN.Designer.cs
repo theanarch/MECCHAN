@@ -10,8 +10,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace MECCHAN.Migrations
 {
     [DbContext(typeof(MECCHANDbContext))]
-    [Migration("20180823120445_initial")]
-    partial class initial
+    [Migration("20180824124856_MECCHAN")]
+    partial class MECCHAN
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {

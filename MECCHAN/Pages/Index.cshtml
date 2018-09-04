@@ -5,7 +5,7 @@
 }
 
 <div class="page-wrapper">
-    <div class="board-wrapper">
+    <div class="board-wrapper" id="bw">
         @foreach (var message in Model.Messages)
         {
             <div id="messageId-@message.Id" class="message-wrapper" style="background-color: #@message.Color;">
@@ -50,21 +50,6 @@
     </div>
 </div>
 
-@*<script>
-        $(document).ready(
-            function () {
-                var url = "Video?handler=Latest";
-                $.ajax({
-                    type: "GET",
-                    url: url,
-                    contentType: "application/json",
-                    dataType: "json"
-                }).done(function (result) {
-                    console.dir(result);
-                });
-            }
-        );
-    </script>*@
 
 <script src="https://code.jquery.com/jquery-3.3.1.slim.js"
         integrity="sha256-fNXJFIlca05BIO2Y5zh1xrShK3ME+/lYZ0j+ChxX2DA="
@@ -78,19 +63,79 @@
             var lastId = $(".board-wrapper .message-wrapper:last-child").attr("id").slice(10);
 
 
-            console.log(lastId);
-            var url = "Index?handler=Pagination&id=20";
+            //console.log(lastId);
+            var url = "Index?handler=Pagination&id=" + lastId;
             $.ajax({
                 type: "GET",
                 url: url,
                 contentType: "application/json",
                 dataType: "json"
             }).done(function (result) {
-                console.dir(result);
-            });
-            //// GET 20 more messages and print
+                //console.dir(result);
+                for (var i = 0; i < result.length; i++) {
+                    message = result[i];
+                    //var messageBoard = document.getElementsByClassName("board - wrapper");
+                    var allMessages = "";
+                    var messageBoard = document.getElementById("bw");
 
-            //$(".page-wrapper").append('<div class="big-box"><h1>Page ' + "12" + '</h1></div>');
+                    //retreiving and treating time
+                    var currentDate = Math.floor(Date.now()/1000);
+                    var postedDate = Date.parse(message.date) / 1000;
+                    var timeDiff = currentDate - postedDate; // time difference in days since the message was posted
+                    var time = GetElapsedTime(timeDiff);
+
+                    allMessages += '<div id="messageId-' + message.id + '"class="message-wrapper" style="background-color: #' + message.color + ';">';
+                    allMessages += '<div class="message-info">';
+                    allMessages += '<div class="info-user"><i class="fas fa-hospital-symbol"></i> <span>' + message.author + ' • ' + time + '</span></div>';
+                    allMessages += '</div>';
+                    allMessages += '<div class="message-content">';
+                    allMessages += '<div class="content-text">';
+                    allMessages += '<p>' + message.text + '</p>';
+                    allMessages += '</div>';
+                    allMessages += '<div class="content-rating">';
+                    allMessages += '<div class="rating-down"><i class="fas fa-chevron-up"></i></div>';
+                    allMessages += '<div class="rating-count">' + message.rating + '</div>';
+                    allMessages += '<div class="rating-down"><i class="fas fa-chevron-down"></i></div></div></div></div>';
+
+                    messageBoard.innerHTML += allMessages;
+                }
+            });
         }
     });
+
+
+    function GetElapsedTime(seconds) {
+        var interval = Math.floor(seconds / 31536000); //input divided by seconds of a year
+
+        if (interval >= 1) {
+            return interval + " Y ago";
+        }
+
+        interval = Math.floor(seconds / 2592000); //input divided by seconds of a month
+
+        if (interval >= 1) {
+            return interval + " M ago";
+        }
+        interval = Math.floor(seconds / 86400); //input divided by seconds of a day
+
+        if (interval >= 1) {
+            return interval <= 1 ? "yesterday" : interval + " days ago";
+        }
+
+        interval = Math.floor(seconds / 3600);
+        if (interval >= 1) {
+            return interval + " h ago";
+        }
+
+        interval = Math.floor(seconds / 60);
+        if (interval >= 1) {
+            return interval + " min ago";
+        }
+
+        interval = Math.floor(seconds);
+        if (interval >= 1) {
+            return interval + "seconds ago";
+        }
+        return "Just now";
+    }
 </script>

@@ -4,7 +4,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 
 namespace MECCHAN.Migrations
 {
-    public partial class initial : Migration
+    public partial class MECCHAN : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
